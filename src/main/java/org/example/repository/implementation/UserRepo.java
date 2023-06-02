@@ -62,6 +62,21 @@ public class UserRepo  implements Repository {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean isExist(String username){
+        Connection connection = DBConnection.getConnection();
+        final String QUERY = "select user_name from users where user_name = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
+            preparedStatement.setString(1,username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet != null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public int[] loadAll() {
 
