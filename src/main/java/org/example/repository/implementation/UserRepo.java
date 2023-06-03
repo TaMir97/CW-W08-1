@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.repository.implementation;
 
 import org.example.connection.DBConnection;
 import org.example.entity.User;
