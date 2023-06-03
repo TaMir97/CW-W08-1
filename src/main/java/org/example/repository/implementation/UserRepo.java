@@ -26,7 +26,7 @@ public class UserRepo {
         }
     }
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         Connection connection = DBConnection.getConnection();
         User user = new User();
         final String QUERY = "select * from users where user_name = ? and password = ?";
@@ -47,7 +47,7 @@ public class UserRepo {
             preparedStatement.close();
             resultSet.close();
 
-            return user.getUserID() != 0;
+            return user;
 
 
         } catch (SQLException e) {
