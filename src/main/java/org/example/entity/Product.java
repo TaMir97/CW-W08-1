@@ -9,7 +9,10 @@ public class Product {
     private int categoryID;
     private int brandID;
 
-    public Product() {};
+    public Product() {
+    }
+
+    ;
 
     public Product(String productName, Date createdDate, int categoryID, int brandID) {
         this.productName = productName;
@@ -60,12 +63,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productID=" + productID +
-                ", productName='" + productName + '\'' +
-                ", createdDate=" + createdDate +
-                ", categoryID=" + categoryID +
-                ", brandID=" + brandID +
-                '}';
+        return "Product:\n" +
+                "productID: " + productID +
+                ", productName: " + productName +
+                ", createdDate: " + createdDate +
+                ", categoryID: " + categoryID +
+                ", brandID: " + brandID + "\n";
     }
 }
