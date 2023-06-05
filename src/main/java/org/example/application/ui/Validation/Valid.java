@@ -1,4 +1,4 @@
-package org.example.validation;
+package org.example.application.ui.Validation;
 
 public class Valid {
     public static boolean validEmail(String email){

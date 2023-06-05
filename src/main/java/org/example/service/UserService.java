@@ -2,7 +2,7 @@ package org.example.service;
 
 import org.example.entity.User;
 import org.example.repository.implementation.UserRepo;
-import org.example.validation.Valid;
+import org.example.application.ui.Validation.Valid;
 
 public class UserService {
     UserRepo userRepository = new UserRepo();
@@ -23,11 +23,15 @@ public class UserService {
         }
     }
 
-    public void login(String username, String password) {
-        if (userRepository.isExist(username)) {
-            userRepository.login(username,password);
+    public User login(String username, String password) {
+        if (isExist(username)) {
+           return userRepository.login(username,password);
         } else {
-            System.out.println("Please sign up");
+            return null;
         }
+    }
+
+    public boolean isExist(String username){
+        return userRepository.isExist(username);
     }
 }
