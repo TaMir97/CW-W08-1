@@ -2,7 +2,7 @@ package org.example.service;
 
 import org.example.entity.User;
 import org.example.repository.implementation.UserRepo;
-import org.example.application.ui.Validation.Valid;
+import org.example.util.Valid;
 
 public class UserService {
     UserRepo userRepository = new UserRepo();
