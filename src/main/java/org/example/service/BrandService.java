@@ -2,13 +2,13 @@ package org.example.service;
 
 import org.example.entity.Brand;
 import org.example.repository.implementation.BrandRepo;
-import org.example.util.Valid;
+import org.example.util.Validations;
 
 public class BrandService {
     BrandRepo brandRepo= new BrandRepo();
 
     public void addNewBrand (Brand brand) {
-        if (Valid.isWebsite(brand.getWebsite())) {
+        if (Validations.isWebsite(brand.getWebsite())) {
             brandRepo.addBrand(brand);
         }
     }
