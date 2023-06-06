@@ -1,6 +1,6 @@
 package org.example.util;
 
-public class Valid {
+public class Validations {
     public static boolean validEmail(String email){
         String regex = "^(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
         return email.matches(regex);
