@@ -7,8 +7,13 @@ import org.example.repository.Repository;
 import java.sql.*;
 
 public class BrandRepo implements Repository {
+    private final Connection connection;
+
+    public BrandRepo(Connection connection) {
+        this.connection = connection;
+    }
+
     public void addBrand(Brand brand) {
-        Connection connection = DBConnection.getConnection();
         final String QUERY = "insert into brand (brand_name, website, description)" +
                 " values (?,?,?)";
         try {
@@ -26,7 +31,6 @@ public class BrandRepo implements Repository {
 
     public void updateBrand(Brand newbrand) {
         try {
-            Connection connection = DBConnection.getConnection();
             final String QUERY = "UPDATE brand SET brand_name = ?, website = ?, description = ? WHERE brand_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setString(1, newbrand.getBrandName());
@@ -43,7 +47,6 @@ public class BrandRepo implements Repository {
 
     public void deleteBrand(int brandId) {
         try {
-            Connection connection = DBConnection.getConnection();
             final String QUERY = "DELETE FROM brand WHERE brand_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
 
@@ -60,7 +63,6 @@ public class BrandRepo implements Repository {
         Brand[] brand = new Brand[recordCounter()];
         try {
             final String QUERY = "SELECT * FROM brand";
-            Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -85,7 +87,6 @@ public class BrandRepo implements Repository {
     public int recordCounter() {
         int count;
         try {
-            Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
             String query = "SELECT count(*) FROM brand";
             ResultSet resultSet = statement.executeQuery(query);

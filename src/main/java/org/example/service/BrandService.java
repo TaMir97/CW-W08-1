@@ -5,23 +5,27 @@ import org.example.repository.implementation.BrandRepo;
 import org.example.util.Validations;
 
 public class BrandService {
-    BrandRepo brandRepo= new BrandRepo();
+    BrandRepo brandRepo;
 
-    public void addNewBrand (Brand brand) {
+    public BrandService(BrandRepo brandRepo) {
+        this.brandRepo = brandRepo;
+    }
+
+    public void addNewBrand(Brand brand) {
         if (Validations.isWebsite(brand.getWebsite())) {
             brandRepo.addBrand(brand);
         }
     }
 
-    public Brand[] loadAllBrands(){
+    public Brand[] loadAllBrands() {
         return brandRepo.loadAllBrand();
     }
 
-    public void updateNewBrand (Brand brand) {
+    public void updateNewBrand(Brand brand) {
         brandRepo.updateBrand(brand);
     }
 
-    public void deleteNewBrand (int branId) {
+    public void deleteNewBrand(int branId) {
         brandRepo.deleteBrand(branId);
     }
 }
