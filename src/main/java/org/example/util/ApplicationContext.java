@@ -1,5 +1,6 @@
 package org.example.util;
 
+import org.example.connection.DBConnection;
 import org.example.repository.implementation.BrandRepo;
 import org.example.repository.implementation.CategoryRepo;
 import org.example.repository.implementation.ProductRepo;
@@ -9,7 +10,11 @@ import org.example.service.CategoryService;
 import org.example.service.ProductService;
 import org.example.service.UserService;
 
+import java.sql.Connection;
+
 public class ApplicationContext {
+
+    private static final Connection connection;
 
     private static final UserRepo userRepo;
     private static final UserService userService;
@@ -21,42 +26,29 @@ public class ApplicationContext {
     private static final ProductService productService;
 
     static {
-        userRepo = new UserRepo();
-        userService = new UserService();
-        categoryRepo = new CategoryRepo();
-        categoryService = new CategoryService();
-        brandRepo = new BrandRepo();
-        brandService = new BrandService();
-        productRepo = new ProductRepo();
-        productService = new ProductService();
+        connection = DBConnection.getConnection();
+        userRepo = new UserRepo(connection);
+        userService = new UserService(userRepo);
+        categoryRepo = new CategoryRepo(connection);
+        categoryService = new CategoryService(categoryRepo);
+        brandRepo = new BrandRepo(connection);
+        brandService = new BrandService(brandRepo);
+        productRepo = new ProductRepo(connection);
+        productService = new ProductService(productRepo);
     }
 
-    public static UserRepo getUserRepo() {
-        return userRepo;
-    }
+
 
     public static UserService getUserService() {
         return userService;
-    }
-
-    public static CategoryRepo getCategoryRepo() {
-        return categoryRepo;
     }
 
     public static CategoryService getCategoryService() {
         return categoryService;
     }
 
-    public static BrandRepo getBrandRepo() {
-        return brandRepo;
-    }
-
     public static BrandService getBrandService() {
         return brandService;
-    }
-
-    public static ProductRepo getProductRepo() {
-        return productRepo;
     }
 
     public static ProductService getProductService() {
