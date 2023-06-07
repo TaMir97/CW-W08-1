@@ -14,16 +14,15 @@ import java.sql.Connection;
 
 public class ApplicationContext {
 
-    private static final Connection connection;
-
-    private static final UserRepo userRepo;
-    private static final UserService userService;
-    private static final CategoryRepo categoryRepo;
-    private static final CategoryService categoryService;
-    private static final BrandRepo brandRepo;
-    private static final BrandService brandService;
-    private static final ProductRepo productRepo;
-    private static final ProductService productService;
+    private static Connection connection;
+    private static UserRepo userRepo;
+    private static UserService userService;
+    private static CategoryRepo categoryRepo;
+    private static CategoryService categoryService;
+    private static BrandRepo brandRepo;
+    private static BrandService brandService;
+    private static ProductRepo productRepo;
+    private static ProductService productService;
 
     static {
         connection = DBConnection.getConnection();
