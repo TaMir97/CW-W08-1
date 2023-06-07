@@ -4,7 +4,11 @@ import org.example.entity.Product;
 import org.example.repository.implementation.ProductRepo;
 
 public class ProductService {
-    ProductRepo productRepo = new ProductRepo();
+    ProductRepo productRepo;
+
+    public ProductService(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
 
     public void addNewProduct(Product product) {
         productRepo.addProduct(product);

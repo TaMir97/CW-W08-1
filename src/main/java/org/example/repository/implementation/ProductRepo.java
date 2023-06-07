@@ -9,9 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ProductRepo {
+    private final Connection connection;
+
+    public ProductRepo(Connection connection) {
+        this.connection = connection;
+    }
 
     public void addProduct(Product product) {
-        Connection connection = DBConnection.getConnection();
         final String QUERY = "insert into product (product_name, created_date, category_id, brand_id)" +
                 " values (?,?,?,?)";
         try {
@@ -30,7 +34,6 @@ public class ProductRepo {
 
     public void updateProduct(Product product) {
         try {
-            Connection connection = DBConnection.getConnection();
             final String QUERY = "UPDATE product SET product_name = ?, category_id = ?, brand_id = ? WHERE product_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setString(1, product.getProductName());
@@ -47,7 +50,7 @@ public class ProductRepo {
 
     public void deleteProduct(int productId) {
         try {
-            Connection connection = DBConnection.getConnection();
+
             final String QUERY = "DELETE FROM product WHERE product_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
 
