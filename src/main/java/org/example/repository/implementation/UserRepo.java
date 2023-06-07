@@ -7,9 +7,13 @@ import java.sql.*;
 import java.util.Random;
 
 public class UserRepo {
+    private final Connection connection;
+
+    public UserRepo(Connection connection) {
+        this.connection = connection;
+    }
 
     public void signUp(User user) {
-        Connection connection = DBConnection.getConnection();
         final String QUERY = "insert into users (name, user_name, password, email)" +
                 " values (?,?,?,?)";
         try {
@@ -27,7 +31,6 @@ public class UserRepo {
     }
 
     public User login(String username, String password) {
-        Connection connection = DBConnection.getConnection();
         User user = new User();
         final String QUERY = "select * from users where user_name = ? and password = ?";
         try {
@@ -56,7 +59,6 @@ public class UserRepo {
     }
 
     public boolean isExist(String username) {
-        Connection connection = DBConnection.getConnection();
         User user = new User();
         final String QUERY = "select * from users where user_name = ?";
         try {

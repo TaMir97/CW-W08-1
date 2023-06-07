@@ -5,7 +5,11 @@ import org.example.repository.implementation.UserRepo;
 import org.example.util.Validations;
 
 public class UserService {
-    UserRepo userRepository = new UserRepo();
+    UserRepo userRepository;
+
+    public UserService(UserRepo userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public void register(User user) {
         if (!userRepository.isExist(user.getUsername())) {
