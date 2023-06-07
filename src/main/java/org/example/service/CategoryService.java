@@ -3,7 +3,11 @@ package org.example.service;
 import org.example.entity.Category;
 import org.example.repository.implementation.CategoryRepo;
 public class CategoryService {
-    CategoryRepo categoryRepo = new CategoryRepo();
+    public CategoryService(CategoryRepo categoryRepo) {
+        this.categoryRepo = categoryRepo;
+    }
+
+    CategoryRepo categoryRepo;
 
     public void addNewCategory(Category category) {
         categoryRepo.addCategory(category);

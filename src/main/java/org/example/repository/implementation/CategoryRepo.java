@@ -7,8 +7,13 @@ import org.example.repository.Repository;
 import java.sql.*;
 
 public class CategoryRepo implements Repository {
+    private final Connection connection;
+
+    public CategoryRepo(Connection connection) {
+        this.connection = connection;
+    }
+
     public void addCategory(Category category) {
-        Connection connection = DBConnection.getConnection();
         final String QUERY = "insert into category (category_name, description)" +
                 " values (?,?);";
         try {
@@ -25,7 +30,6 @@ public class CategoryRepo implements Repository {
 
     public void updateCategory(Category category) {
         try {
-            Connection connection = DBConnection.getConnection();
             final String QUERY = "UPDATE category SET category_name = ?, description = ? WHERE category_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             preparedStatement.setString(1, category.getCategoryName());
@@ -41,7 +45,6 @@ public class CategoryRepo implements Repository {
 
     public void deleteCategory(int categoryId) {
         try {
-            Connection connection = DBConnection.getConnection();
             final String QUERY = "DELETE FROM category WHERE category_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
 
@@ -58,7 +61,6 @@ public class CategoryRepo implements Repository {
         Category [] category = new Category [recordCounter()];
         try {
             final String QUERY = "SELECT * FROM category";
-            Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -82,7 +84,6 @@ public class CategoryRepo implements Repository {
     public int recordCounter() {
         int count;
         try {
-            Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
             String query = "SELECT count(*) FROM category";
             ResultSet resultSet = statement.executeQuery(query);
